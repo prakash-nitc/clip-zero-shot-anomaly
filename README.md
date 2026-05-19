@@ -43,36 +43,43 @@ CLIP ViT-L/14, zero training data. Reproduce: `python benchmark.py --data /path/
 | Method | Training data | Image AUROC | Pixel AUROC |
 |--------|--------------|-------------|-------------|
 | One-Class SVM (CLIP features) | Normal images only | 92.4% | — |
-| **CLIP Zero-Shot (ours)** | **None** | **88.5%** | **__%__** |
+| **CLIP Zero-Shot (ours)** | **None** | **88.5%** | **71.0%** |
 
-### Per-category (image-level AUROC)
+### Per-category results
 
-| Category | OC-SVM (trained) | CLIP Zero-Shot |
-|---|---|---|
-| carpet | 97.5% | **99.2%** |
-| grid | 92.7% | **99.7%** |
-| leather | 100.0% | **100.0%** |
-| tile | 99.6% | 98.7% |
-| wood | 99.6% | **100.0%** |
-| bottle | 99.4% | 85.6% |
-| cable | 84.4% | 79.5% |
-| capsule | 87.9% | 80.9% |
-| hazelnut | 97.5% | 86.8% |
-| metal_nut | 96.2% | 84.3% |
-| pill | 86.8% | 85.6% |
-| screw | 67.3% | **84.3%** |
-| toothbrush | 100.0% | 90.8% |
-| transistor | 87.0% | 72.7% |
-| zipper | 90.6% | 80.3% |
-| **MEAN** | **92.4%** | **88.5%** |
+| Category | OC-SVM (trained) | CLIP Zero-Shot | Pixel AUROC |
+|---|---|---|---|
+| carpet | 97.5% | **99.2%** ✓ | 93.8% |
+| grid | 92.7% | **99.7%** ✓ | 88.6% |
+| leather | 100.0% | **100.0%** ✓ | 91.7% |
+| tile | 99.6% | 98.7% | 78.7% |
+| wood | 99.6% | **100.0%** ✓ | 84.0% |
+| bottle | 99.4% | 85.6% | 64.4% |
+| cable | 84.4% | 79.5% | 59.2% |
+| capsule | 87.9% | 80.9% | 44.5% |
+| hazelnut | 97.5% | 86.8% | 83.6% |
+| metal_nut | 96.2% | 84.3% | 74.4% |
+| pill | 86.8% | 85.6% | 44.5% |
+| screw | 67.3% | **84.3%** ✓ | 78.6% |
+| toothbrush | 100.0% | 90.8% | 33.5% |
+| transistor | 87.0% | 72.7% | 53.3% |
+| zipper | 90.6% | 80.3% | 92.1% |
+| **MEAN** | **92.4%** | **88.5%** | **71.0%** |
+
+✓ = CLIP zero-shot outperforms the trained baseline
 
 ### Prompt ablation (mean image-level AUROC)
 
 | Prompt design | AUROC |
 |---|---|
-| Generic single prompt ("a photo of a damaged object") | __%__ |
-| Category-specific single prompt | __%__ |
-| Category-specific + ensemble (ours) | __%__ |
+| Generic single prompt ("a photo of a damaged object") | 89.1% |
+| Category-specific single prompt | 88.6% |
+| Category-specific + ensemble (ours) | 88.5% |
+
+> **Finding:** Prompt ensembling did not improve over a single generic prompt
+> (89.1% → 88.5%). This suggests CLIP's language prior is already strong enough
+> at the image level that elaborate prompt engineering yields diminishing returns
+> — the bottleneck is spatial precision, not language understanding.
 
 ### Analysis
 
