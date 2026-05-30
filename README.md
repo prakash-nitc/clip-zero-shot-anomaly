@@ -15,7 +15,7 @@ license: mit
 Upload a product image, pick its category — the model flags defects
 **without any task-specific training** using a vision-language model (CLIP).
 
-**Live demo:** _[add Hugging Face Space URL after deploy]_
+**Live demo:** _Deploy to Hugging Face Spaces (see instructions below) and add URL here._
 
 ---
 
@@ -113,8 +113,8 @@ research project.
 ## Run locally
 
 ```bash
-git clone https://github.com/prakash-nitc/clip-anomaly-detection
-cd clip-anomaly-detection
+git clone https://github.com/prakash-nitc/clip-zero-shot-anomaly.git
+cd clip-zero-shot-anomaly
 pip install -r requirements.txt
 
 # Interactive demo
